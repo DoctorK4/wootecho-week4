@@ -1,5 +1,10 @@
+import EventPlanner from './controller/EventPlanner.js';
+
 class App {
-  async run() {}
+  async run() {
+    this.eventPlanner = new EventPlanner();
+    await this.eventPlanner.receiveReservation();
+  }
 }
 
 export default App;
