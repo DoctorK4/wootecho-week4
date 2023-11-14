@@ -12,6 +12,8 @@ export const INPUT_GUIDE_MESSAGE = Object.freeze({
 export const OUTPUT_MESSAGE = Object.freeze({
   GREET: '안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.',
   ORDERED_MENU: '<주문 메뉴>',
+  BENEFIT_PREVIEW: '에 우테코 식당에서 받을 이벤트 혜택 미리 보기!',
+  NONE: '없음',
 });
 
 export const ERROR_MESSAGE = Object.freeze({
@@ -24,4 +26,32 @@ export const MONTH = Object.freeze({
     MIN_DATE_VALUE: 1,
     MAX_DATE_VALUE: 31,
   },
+});
+
+export const MENU = Object.freeze({
+  애피타이저: {
+    양송이수프: 6000,
+    타파스: 5500,
+    시저샐러드: 8000,
+  },
+  메인: {
+    티본스테이크: 55000,
+    바비큐립: 54000,
+    해산물파스타: 35000,
+    크리스마스파스타: 25000,
+  },
+  디저트: {
+    초코케이크: 15000,
+    아이스크림: 5000,
+  },
+  음료: {
+    제로콜라: 3000,
+    레드와인: 60000,
+    샴페인: 25000,
+  },
+});
+
+export const ORDER_UNIT = Object.freeze({
+  MIN_UNIT: 1,
+  MAX_UNIT: 20,
 });
