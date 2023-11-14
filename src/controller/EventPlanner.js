@@ -3,7 +3,7 @@ import dateValidator from '../validator/dateValidator.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import orderValidator from '../validator/orderValidator.js';
-import parseOrder from '../model/parseOrder.js';
+import parseOrder from '../utils/parseOrder.js';
 
 class EventPlanner {
   async receiveReservation() {
