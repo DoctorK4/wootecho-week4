@@ -1,7 +1,7 @@
 import { ERROR_MESSAGE } from '../constant.js';
 import CustomError from '../error/CustomError.js';
 import validator from './validator.js';
-import parseOrder from '../model/parseOrder.js';
+import parseOrder from '../utils/parseOrder.js';
 
 const orderInputValidator = orderInput => {
   if (
@@ -13,8 +13,7 @@ const orderInputValidator = orderInput => {
 };
 
 const orderListValidator = orderList => {
-  const menuNames = Object.keys(orderList);
-  menuNames.forEach(menuName => {
+  Object.keys(orderList).forEach(menuName => {
     if (!validator.isInMenu(menuName)) {
       throw new CustomError(ERROR_MESSAGE.WRONG_ORDER);
     }
