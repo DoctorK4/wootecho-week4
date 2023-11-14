@@ -5,9 +5,11 @@ const OutputView = {
   greet() {
     Console.print(OUTPUT_MESSAGE.GREET);
   },
-  printMenu() {
-    Console.print(OUTPUT_MESSAGE.ORDERED_MENU);
-    Console.print();
+  printMenu(orderObject) {
+    Console.print(`\n${OUTPUT_MESSAGE.ORDERED_MENU}`);
+    Object.keys(orderObject).forEach(menu => {
+      Console.print(`${menu} ${orderObject[menu]}개`);
+    });
   },
   printPreviewGuide(date) {
     Console.print(

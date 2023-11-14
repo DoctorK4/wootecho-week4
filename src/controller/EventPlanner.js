@@ -3,14 +3,18 @@ import dateValidator from '../validator/dateValidator.js';
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import orderValidator from '../validator/orderValidator.js';
-import parseOrder from '../parseOrder.js';
+import parseOrder from '../model/parseOrder.js';
 
 class EventPlanner {
   async receiveReservation() {
     OutputView.greet();
+
     const visitDate = await this.readDateWithRetry();
     const orderedMenu = await this.readMenuWithRetry();
     const orderObject = parseOrder(orderedMenu);
+
+    OutputView.printPreviewGuide(visitDate);
+    OutputView.printMenu(orderObject);
   }
 
   async readDateWithRetry() {

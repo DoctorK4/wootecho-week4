@@ -1,7 +1,7 @@
 import { ERROR_MESSAGE } from '../constant.js';
 import CustomError from '../error/CustomError.js';
 import validator from './validator.js';
-import parseOrder from '../parseOrder.js';
+import parseOrder from '../model/parseOrder.js';
 
 const orderInputValidator = orderInput => {
   if (
