@@ -4,6 +4,7 @@ import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import orderValidator from '../validator/orderValidator.js';
 import parseOrder from '../utils/parseOrder.js';
+import TotalAmount from '../model/TotalAmount.js';
 
 class EventPlanner {
   async receiveReservation() {
@@ -15,6 +16,9 @@ class EventPlanner {
 
     OutputView.printPreviewGuide(visitDate);
     OutputView.printMenu(orderObject);
+    const totalAmountBeforeDiscount =
+      TotalAmount.calculateTotalAmountBeforeDiscount(orderObject);
+    OutputView.printTotalAmountBeforeDiscount(totalAmountBeforeDiscount);
   }
 
   async readDateWithRetry() {
