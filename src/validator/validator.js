@@ -15,16 +15,16 @@ const inspectOverlap = (array, set) => {
   }, false);
 };
 
-function validateOrderFormat(singleMenu) {
+const validateOrderFormat = singleMenu => {
   if (!singleMenu.includes('-')) {
     return false;
   }
-  const [menuName, unit] = singleMenu.split('-');
-  if (!Number.isInteger(Number(unit)) || Number(unit) <= 0) {
+  const unit = Number(singleMenu.split('-')[1]);
+  if (!Number.isInteger(unit) || unit <= 0) {
     return false;
   }
   return true;
-}
+};
 
 const validator = Object.freeze({
   isNumType(input) {
