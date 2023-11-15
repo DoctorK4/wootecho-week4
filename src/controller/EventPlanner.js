@@ -9,18 +9,18 @@ import TotalAmount from '../model/TotalAmount.js';
 class EventPlanner {
   async receiveReservation() {
     OutputView.greet();
-
     const visitDate = await this.readDateWithRetry();
     const orderedMenu = await this.readMenuWithRetry();
     const orderObject = parseOrder(orderedMenu);
-
     OutputView.printPreviewGuide(visitDate);
     OutputView.printMenu(orderObject);
-
     const totalAmount = new TotalAmount(orderObject);
     OutputView.printTotalAmountBeforeDiscount(totalAmount.getTotalAmount());
+    const giftStatus = totalAmount.getGiftStatus();
+    OutputView.printGift(giftStatus);
 
-    OutputView.printGift(totalAmount.getGiftStatus());
+    const discountStatus = totalAmount.getDiscountList(orderObject, visitDate);
+    OutputView.printBenefit(discountStatus, giftStatus);
   }
 
   async readDateWithRetry() {

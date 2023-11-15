@@ -26,10 +26,6 @@ class Gift {
 
     return { [this.#giftGoods]: this.#giftUnit };
   }
-
-  getGiftPrice() {
-    return getMenuPrice(this.#giftGoods);
-  }
 }
 
 export default Gift;

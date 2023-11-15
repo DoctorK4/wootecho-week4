@@ -1,5 +1,10 @@
-import { MENU } from '../constant.js';
+import { EVENT_CONDITION } from '../constant.js';
+import getMenuPrice from '../utils/getMenuPrice.js';
+import ChristmasDiscount from './Christmas.js';
 import Gift from './Gift.js';
+import SpecialDiscount from './Special.js';
+import WeekdayDiscount from './Weekdays.js';
+import WeekendDiscount from './Weekend.js';
 
 class TotalAmount {
   #totalAmount;
@@ -15,22 +20,31 @@ class TotalAmount {
   }
 
   calculateTotalAmountBeforeDiscount(orderObject) {
-    const categories = Object.keys(MENU);
     return Object.keys(orderObject).reduce((accumulator, currentOrder) => {
-      let price;
-      categories.forEach(category => {
-        if (currentOrder in MENU[category]) {
-          price = MENU[category][currentOrder];
-        }
-      });
+      const price = getMenuPrice(currentOrder);
+
       return accumulator + price * orderObject[currentOrder];
     }, 0);
   }
 
-  getGiftStatus() {
-    const gift = new Gift(this.getTotalAmount());
+  isEventTarget() {
+    return this.getTotalAmount() >= EVENT_CONDITION.MIN_ORDER_AMOUNT;
+  }
 
-    return gift.getGiftinfo();
+  getGiftStatus() {
+    this.#gift = new Gift(this.getTotalAmount());
+
+    return this.#gift.getGiftinfo();
+  }
+
+  getDiscountList(orderObject, date) {
+    if (!this.isEventTarget()) return null;
+    return {
+      christmas: new ChristmasDiscount(date).getTotalDiscount(),
+      weekday: new WeekdayDiscount(date, orderObject).getTotalDiscount(),
+      weekend: new WeekendDiscount(date, orderObject).getTotalDiscount(),
+      special: new SpecialDiscount(date).getTotalDiscount(),
+    };
   }
 }
 
