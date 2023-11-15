@@ -18,9 +18,9 @@ class EventPlanner {
     OutputView.printTotalAmountBeforeDiscount(totalAmount.getTotalAmount());
     const giftStatus = totalAmount.getGiftStatus();
     OutputView.printGift(giftStatus);
-
     const discountStatus = totalAmount.getDiscountList(orderObject, visitDate);
     OutputView.printBenefit(discountStatus, giftStatus);
+    OutputView.printEstimatedCharge(discountStatus, totalAmount.getTotalAmount());
   }
 
   async readDateWithRetry() {

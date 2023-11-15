@@ -77,6 +77,12 @@ const OutputView = {
     Console.print(`\n${OUTPUT_MESSAGE.TITLE.TOTAL_BENEFIT_AMOUNT}`);
     Console.print(`-${totalBenefitAmount.toLocaleString()}원`);
   },
+  printEstimatedCharge(discountStatus, totalAmountBeforeDiscount) {
+    const estimatedAmount =
+      totalAmountBeforeDiscount - OutputView.getTotalDiscount(discountStatus);
+    Console.print(`\n${OUTPUT_MESSAGE.TITLE.TOTAL_AMOUNT_AFTER_DISCOUNT}`);
+    Console.print(`${estimatedAmount.toLocaleString()}원`);
+  },
   printBenefit(discountStatus, giftStatus) {
     OutputView.printDiscountPrices(discountStatus);
     if (giftStatus) OutputView.printGiftValue(giftStatus);
