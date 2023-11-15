@@ -1,5 +1,4 @@
 import { EVENT_CONDITION } from '../constant.js';
-import getMenuPrice from '../utils/getMenuPrice.js';
 
 class Gift {
   #giftGoods;
