@@ -95,17 +95,10 @@ const OutputView = {
     OutputView.printTotalBenefitAmount(discountStatus, giftStatus);
   },
   getBadgeGrade(totalBenefitAmount) {
-    if (
-      totalBenefitAmount >= EVENT_CONDITION.BADGE.SECTION.LOW &&
-      totalBenefitAmount < EVENT_CONDITION.BADGE.SECTION.MID
-    )
-      return 'LOW';
-    if (
-      totalBenefitAmount >= EVENT_CONDITION.BADGE.SECTION.MID &&
-      totalBenefitAmount < EVENT_CONDITION.BADGE.SECTION.HIGH
-    )
-      return 'MID';
-    if (totalBenefitAmount >= EVENT_CONDITION.BADGE.SECTION.HIGH) return 'HIGH';
+    const { LOW, MID, HIGH } = EVENT_CONDITION.BADGE.SECTION;
+    if (totalBenefitAmount >= LOW && totalBenefitAmount < MID) return 'LOW';
+    if (totalBenefitAmount >= MID && totalBenefitAmount < HIGH) return 'MID';
+    if (totalBenefitAmount >= HIGH) return 'HIGH';
     return 'NONE';
   },
   printEventBadge(discountStatus, giftStatus) {
