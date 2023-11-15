@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { EVENT_MONTH, OUTPUT_MESSAGE } from '../constant.js';
+import { EVENT_CONDITION, EVENT_MONTH, OUTPUT_MESSAGE } from '../constant.js';
 import getMenuPrice from '../utils/getMenuPrice.js';
 
 const OutputView = {
@@ -70,10 +70,16 @@ const OutputView = {
     );
     return totalDiscount;
   },
-  printTotalBenefitAmount(discountStatus, giftStatus) {
+  getTotalBenefitAmount(discountStatus, giftStatus) {
     const totalDiscount = OutputView.getTotalDiscount(discountStatus);
     const giftValue = OutputView.getGiftValue(giftStatus);
-    const totalBenefitAmount = totalDiscount + giftValue;
+    return totalDiscount + giftValue;
+  },
+  printTotalBenefitAmount(discountStatus, giftStatus) {
+    const totalBenefitAmount = OutputView.getTotalBenefitAmount(
+      discountStatus,
+      giftStatus,
+    );
     Console.print(`\n${OUTPUT_MESSAGE.TITLE.TOTAL_BENEFIT_AMOUNT}`);
     Console.print(`-${totalBenefitAmount.toLocaleString()}원`);
   },
@@ -87,6 +93,32 @@ const OutputView = {
     OutputView.printDiscountPrices(discountStatus);
     if (giftStatus) OutputView.printGiftValue(giftStatus);
     OutputView.printTotalBenefitAmount(discountStatus, giftStatus);
+  },
+  getBadgeGrade(totalBenefitAmount) {
+    if (
+      totalBenefitAmount >= EVENT_CONDITION.BADGE.SECTION.LOW &&
+      totalBenefitAmount < EVENT_CONDITION.BADGE.SECTION.MID
+    )
+      return 'LOW';
+    if (
+      totalBenefitAmount >= EVENT_CONDITION.BADGE.SECTION.MID &&
+      totalBenefitAmount < EVENT_CONDITION.BADGE.SECTION.HIGH
+    )
+      return 'MID';
+    if (totalBenefitAmount >= EVENT_CONDITION.BADGE.SECTION.HIGH) return 'HIGH';
+    return 'NONE';
+  },
+  printEventBadge(discountStatus, giftStatus) {
+    const totalBenefitAmount = OutputView.getTotalBenefitAmount(
+      discountStatus,
+      giftStatus,
+    );
+    Console.print(`\n<${EVENT_MONTH.num}${OUTPUT_MESSAGE.TITLE.EVENT_BADGE}`);
+    Console.print(
+      `${
+        EVENT_CONDITION.BADGE.NAME[OutputView.getBadgeGrade(totalBenefitAmount)]
+      }`,
+    );
   },
 };
 

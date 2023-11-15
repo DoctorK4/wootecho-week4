@@ -7,20 +7,58 @@ import parseOrder from '../utils/parseOrder.js';
 import TotalAmount from '../model/TotalAmount.js';
 
 class EventPlanner {
+  #visitDate;
+
+  #orderObject;
+
+  #totalAmount;
+
+  #discountStatus;
+
+  #giftStatus;
+
+  #badge;
+
+  async eventPlan() {
+    await this.receiveReservation();
+    this.showOrder();
+    this.showBenefits();
+    this.showBadge();
+  }
+
   async receiveReservation() {
     OutputView.greet();
-    const visitDate = await this.readDateWithRetry();
+    this.#visitDate = await this.readDateWithRetry();
     const orderedMenu = await this.readMenuWithRetry();
-    const orderObject = parseOrder(orderedMenu);
-    OutputView.printPreviewGuide(visitDate);
-    OutputView.printMenu(orderObject);
-    const totalAmount = new TotalAmount(orderObject);
-    OutputView.printTotalAmountBeforeDiscount(totalAmount.getTotalAmount());
-    const giftStatus = totalAmount.getGiftStatus();
-    OutputView.printGift(giftStatus);
-    const discountStatus = totalAmount.getDiscountList(orderObject, visitDate);
-    OutputView.printBenefit(discountStatus, giftStatus);
-    OutputView.printEstimatedCharge(discountStatus, totalAmount.getTotalAmount());
+    this.#orderObject = parseOrder(orderedMenu);
+  }
+
+  showOrder() {
+    OutputView.printPreviewGuide(this.#visitDate);
+    OutputView.printMenu(this.#orderObject);
+    this.#totalAmount = new TotalAmount(this.#orderObject);
+    const totalAmountBeforeDiscount = this.#totalAmount.getTotalAmount();
+    OutputView.printTotalAmountBeforeDiscount(totalAmountBeforeDiscount);
+  }
+
+  showBenefits() {
+    this.#giftStatus = this.#totalAmount.getGiftStatus();
+    OutputView.printGift(this.#giftStatus);
+
+    this.#discountStatus = this.#totalAmount.getDiscountList(
+      this.#orderObject,
+      this.#visitDate,
+    );
+    OutputView.printBenefit(this.#discountStatus, this.#giftStatus);
+
+    OutputView.printEstimatedCharge(
+      this.#discountStatus,
+      this.#totalAmount.getTotalAmount(),
+    );
+  }
+
+  showBadge() {
+    OutputView.printEventBadge(this.#discountStatus, this.#giftStatus);
   }
 
   async readDateWithRetry() {

@@ -84,4 +84,17 @@ export const EVENT_CONDITION = Object.freeze({
     GOODS: '샴페인',
     UNIT: 1,
   },
+  BADGE: {
+    NAME: {
+      NONE: '없음',
+      LOW: '별',
+      MID: '트리',
+      HIGH: '산타',
+    },
+    SECTION: {
+      LOW: 5000,
+      MID: 10000,
+      HIGH: 20000,
+    },
+  },
 });

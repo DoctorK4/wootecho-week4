@@ -3,7 +3,7 @@ import EventPlanner from './controller/EventPlanner.js';
 class App {
   async run() {
     this.eventPlanner = new EventPlanner();
-    await this.eventPlanner.receiveReservation();
+    await this.eventPlanner.eventPlan();
   }
 }
 
