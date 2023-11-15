@@ -15,6 +15,7 @@ export const OUTPUT_MESSAGE = Object.freeze({
   TITLE: {
     ORDERED_MENU: '<주문 메뉴>',
     TOTAL_AMOUNT_BEFORE_DISCOUNT: '<할인 전 총주문 금액>',
+    GIFT: '<증정 메뉴>',
   },
   NONE: '없음',
 });
@@ -57,4 +58,12 @@ export const MENU = Object.freeze({
 export const ORDER_UNIT = Object.freeze({
   MIN_UNIT: 1,
   MAX_UNIT: 20,
+});
+
+export const EVENT_CONDITION = Object.freeze({
+  GIFT: {
+    MIN_ORDER_AMOUNT: 120000,
+    GOODS: '샴페인',
+    UNIT: 1,
+  },
 });

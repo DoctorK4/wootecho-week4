@@ -16,9 +16,11 @@ class EventPlanner {
 
     OutputView.printPreviewGuide(visitDate);
     OutputView.printMenu(orderObject);
-    const totalAmountBeforeDiscount =
-      TotalAmount.calculateTotalAmountBeforeDiscount(orderObject);
-    OutputView.printTotalAmountBeforeDiscount(totalAmountBeforeDiscount);
+
+    const totalAmount = new TotalAmount(orderObject);
+    OutputView.printTotalAmountBeforeDiscount(totalAmount.getTotalAmount());
+
+    OutputView.printGift(totalAmount.getGiftStatus());
   }
 
   async readDateWithRetry() {

@@ -20,6 +20,15 @@ const OutputView = {
     Console.print(`\n${OUTPUT_MESSAGE.TITLE.TOTAL_AMOUNT_BEFORE_DISCOUNT}`);
     Console.print(`${value.toLocaleString()}원`);
   },
+  printGift(giftStatus) {
+    Console.print(`\n${OUTPUT_MESSAGE.TITLE.GIFT}`);
+    if (giftStatus === null) Console.print(OUTPUT_MESSAGE.NONE);
+    if (giftStatus) {
+      Object.keys(giftStatus).forEach(item => {
+        Console.print(`${item} ${giftStatus[item]}개`);
+      });
+    }
+  },
 };
 
 export default OutputView;
