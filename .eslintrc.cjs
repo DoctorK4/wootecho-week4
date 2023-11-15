@@ -11,4 +11,7 @@ module.exports = {
     'no-else-return': ['error', { allowElseIf: false }],
     'import/extensions': 'warn',
   },
+  parserOptions: {
+    ecmaVersion: 13,
+  },
 };
